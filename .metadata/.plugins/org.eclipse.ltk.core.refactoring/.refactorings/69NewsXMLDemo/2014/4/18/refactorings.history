@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;NewsRssDetail.java&apos; to &apos;69NewsXMLDemo/src/kr.android.news&apos;&#x0D;&#x0A;- Original project: &apos;69NewsXMLDemo&apos;&#x0D;&#x0A;- Destination element: &apos;69NewsXMLDemo/src/kr.android.news&apos;&#x0D;&#x0A;- Original element: &apos;NewsRssDetail.NewsRssDetail.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;kr.android.news" element1="/src&lt;NewsRssDetail{NewsRssDetail.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1398842345209" units="1" version="1.0"/>
+</session>

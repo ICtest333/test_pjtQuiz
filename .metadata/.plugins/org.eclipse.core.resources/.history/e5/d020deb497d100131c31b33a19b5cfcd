@@ -1,0 +1,54 @@
+package kr.android.map;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+
+public class MainActivity extends ActionBarActivity {
+
+	GoogleMap map;
+	static final LatLng ADDR_GANGNAM_STATION = new LatLng(37.498231, 127.027637); //위도,경도
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		if(map==null){
+			map = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
+			if(map!=null){
+				//기본마커표시
+				//addBasicMarker();
+				
+				//화면에 지정한 위도 경도 표시
+				CameraPosition cp = new CameraPosition.Builder().target(ADDR_GANGNAM_STATION).zoom(17).build();
+				
+				map.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
+				
+				map.setMyLocationEnabled(true); // 현재위치정보 가져오기
+				
+				UiSettings set = map.getUiSettings();
+				set.setMyLocationButtonEnabled(true); // 현재위치로 이동할수있는 아이콘 표시 (우상단 아이콘)				
+			}			
+		} //outer if		
+	} //onCreate 
+	
+	// 마커 표시
+	private void addBasicMarker(){
+		map.addMarker(new MarkerOptions()
+					.position(ADDR_GANGNAM_STATION)
+					.title("강남역")
+					.snippet("나 지하철 타요~~")
+					.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))		
+					);
+	}
+	
+}

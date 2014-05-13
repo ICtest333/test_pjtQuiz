@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.android.edit.MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:inputType="textMultiLine"
+        android:text="홍길동"
+        > 
+        <requestFocus/>
+     </EditText>
+<!--     
+	android:ems="10" : 수평크기를 EM(가장큰글자기준영역) 크기 기준을 지정
+    기본적으로 10개의 글자가 있는 것처럼 초기값 주는 것 (제외시켜보자! 삭제!)
+    
+    싱글라인(enter 없음) 
+    android:inputType="text"
+    
+    멀티라인(enter 있음)
+    android:inputType="textMultiLine"
+    
+    힌트기능 : 데이터 입력에 대한 가이드 (입력을 시작하면 사라짐)
+    android:hint="가이드 내용"
+    
+    텍스트속성(예시)부여: 입력시작해도 안사라짐
+    android:text="홍길동"
+ -->
+
+</RelativeLayout>
+

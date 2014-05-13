@@ -1,0 +1,17 @@
+{
+	"menu":"회원관리",
+	"member":[
+			{
+				"id":"dragon",
+				"name":"홍길동",
+				"address":"서울시",
+				"job":"학생"
+			},
+			{
+				"id":"sky",
+				"name":"장영실",
+				"address":"부산시",
+				"job":"직장인"
+			}
+	]
+}

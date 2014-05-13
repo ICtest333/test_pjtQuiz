@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.android.grid.MainActivity"
+    >
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3행3열의 수평 그리드 레이아웃"
+        />
+    <!-- 
+    GridLayout은 API 14(안드로이드4.0)부터 사용가능하기 때문에 
+    AndroidManifest.xml 에 min SDK 버전을 14 이상으로 설정해야 함
+    (android:minSdkVersion="14") : 하위버전의 폰은 지원안됨
+     -->
+     <GridLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:columnCount="3"
+         android:rowCount="3"
+         >
+         <Button android:text="1"/>
+         <Button android:text="2"/>
+         <Button android:text="3"/>
+         <Button android:text="4"/>
+         <Button android:text="5"/>
+         <Button android:text="6"/>
+         <Button android:text="7"/>
+     </GridLayout>
+     <!-- 계산기 등에 적용가능 -->
+     <TextView 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="4열의 수평 그리드 레이아웃"
+         />
+     <GridLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:columnCount="4"
+         >
+         <!-- 열(column)만 지정하면 행(row)은 자동생성 -->
+         <Button android:text="1"/>
+         <Button android:text="2"/>
+         <Button android:text="3"/>
+         <Button android:text="4"/>
+         <Button android:text="5"/>
+         <Button android:text="6"/>
+         <Button android:text="7"/>
+     </GridLayout>
+</LinearLayout>

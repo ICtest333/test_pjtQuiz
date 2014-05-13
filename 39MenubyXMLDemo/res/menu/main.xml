@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kr.android.menu3.MainActivity" >
+
+    <item 
+        android:id="@+id/seoul"
+        android:title="서울"
+        />
+    <item 
+        android:id="@+id/busan"
+        android:title="부산"
+        />
+    <item 
+        android:id="@+id/submenu"
+        android:title="기타">
+        <menu>
+            <item 
+                android:id="@+id/suwon"
+                android:title="수원"
+                />
+            <item 
+                android:id="@+id/jeju"
+                android:title="제주도"
+                />
+        </menu>
+    </item>
+</menu>

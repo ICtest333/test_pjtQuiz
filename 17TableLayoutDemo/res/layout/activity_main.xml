@@ -1,0 +1,18 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.android.table.MainActivity"
+    >
+	<TableRow >
+	    <TextView android:text="국어" android:textSize="30sp" android:padding="10dp"/>
+	    <TextView android:text="영어" android:textSize="30sp" android:padding="10dp"/>
+	    <TextView android:text="수학" android:textSize="30sp" android:padding="10dp"/>
+	</TableRow>
+		<TableRow >
+	    <TextView android:text="88" android:textSize="30sp" android:padding="10dp"/>
+	    <TextView android:text="92" android:textSize="30sp" android:padding="10dp"/>
+	    <TextView android:text="96" android:textSize="30sp" android:padding="10dp"/>
+	</TableRow>
+</TableLayout>

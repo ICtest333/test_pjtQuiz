@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quizes>
+    <quiz>
+        <category>JAVA</category>
+        <question>다음중 구분자로 콜론(:)을 반드시 한번 이상 사용해야 하는 경우가 아닌 것은?</question>
+        <example first="삼항연산" second="switch~case문" third="break 레이블" forth="do~while문"/>
+        <answer first="do~while문" second="" third="" forth=""/>
+        <hint>콜론과 세미콜론의 구분</hint>
+    </quiz>
+</quizes>

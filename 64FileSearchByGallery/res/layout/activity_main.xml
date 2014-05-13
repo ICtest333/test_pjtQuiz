@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.android.gallery.MainActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+        
+        <ScrollView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+            <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+	            <ImageView
+	            android:id="@+id/photo"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:visibility="gone"
+	            />
+	        	<TextView
+	            android:id="@+id/text"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:visibility="gone"
+	            android:layout_weight="0"
+	            />
+        	</LinearLayout>
+        </ScrollView>
+       
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사진선택"
+            android:layout_weight="0"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
