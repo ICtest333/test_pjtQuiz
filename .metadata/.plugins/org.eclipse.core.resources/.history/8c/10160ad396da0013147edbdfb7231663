@@ -16,7 +16,7 @@ public class MainActivity extends Activity { // Activity : 하나의 화면(UI)
         TextView tv = new TextView(this); // this => MainActivity 객체 전달하는 ㅇ니자
         //문자열 입력
         //tv.setText("텍스트 직접 입력");
-        tv.setText("GitTest");
+        tv.setText("텍스트 직접 입력");
         
         //Activity에 View 등록(옛날방식)
         setContentView(tv);
