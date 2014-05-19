@@ -1,0 +1,53 @@
+package kr.pjt.quiz;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class QuizDBhelp extends SQLiteOpenHelper {
+
+	public QuizDBhelp(Context context, String name, CursorFactory factory,
+			int version) {
+		super(context, DB_NAME, null, 1);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		db.execSQL(CREATE_TABLE);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// TODO Auto-generated method stub
+		db.execSQL(DROP_TABLE);
+		onCreate(db);
+	}
+
+	// DatabaseAdapter ************** #58
+	//Log 처리를 위한 TAG 지정
+		static final String TAG = "DatabaseAdapter";
+		//데이터베이스 파일 이름
+		static final String DB_NAME = "quiz.db";
+		//테이블 이름
+		static final String TABLE_NAME = "quiz";
+		//각 열(컬럼)의 이름
+		static final String QUIZ_ID = "_id";
+		static final String MEMO_CONTENT = "content";
+		//컬럼 인덱스
+		static final int ID_INDEX = 0;
+		static final int CONTENT_INDEX = 1;
+		//컬럼 명세
+		static final String[] PROJECTION = new String[]{QUIZ_ID,MEMO_CONTENT};
+		//테이블 생성 SQL
+		static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + MEMO_CONTENT + " text not null)";
+		//테이블 삭제 SQL
+		static final String DROP_TABLE = "DROP TABLE IF EXISTS " +TABLE_NAME; // EXISTS : -S 빠지면 에러남!
+		
+	
+	
+}//QuizDBhelp
+
+

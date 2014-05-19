@@ -45,15 +45,15 @@ public class DbHelper extends SQLiteOpenHelper {
 	}
 	private void addQuestions()
 	{
-		Question q1=new Question("q1 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint1");
+		Question q1=new Question("q1 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "development environment", "hint1");
 		this.addQuestion(q1);
-		Question q2=new Question("q2 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint2");
+		Question q2=new Question("q2 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "development environment", "hint2");
 		this.addQuestion(q2);
-		Question q3=new Question("q3 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint3");
+		Question q3=new Question("q3 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "development environment", "hint3");
 		this.addQuestion(q3);
-		Question q4=new Question("q4 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint4");
+		Question q4=new Question("q4 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "development environment", "hint4");
 		this.addQuestion(q4);
-		Question q5=new Question("q5 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint5");
+		Question q5=new Question("q5 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "development environment", "hint5");
 		this.addQuestion(q5);
 	}
 	@Override
