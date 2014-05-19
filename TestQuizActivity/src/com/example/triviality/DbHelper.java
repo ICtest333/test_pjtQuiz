@@ -28,25 +28,32 @@ public class DbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		dbase=db;
+		/*
 		String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_QUEST + " ( "
 				+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUES
 				+ " TEXT, " + KEY_ANSWER+ " TEXT, "+KEY_OPTA +" TEXT, "
 				+KEY_OPTB +" TEXT, "+KEY_OPTC +" TEXT, "+KEY_OPTD +" TEXT, "+KEY_HINT+" TEXT)"; //option/hint added..
+		*/
+		String sql = "CREATE TABLE " + TABLE_QUEST + " ( "
+				+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUES
+				+ " TEXT, " + KEY_ANSWER+ " TEXT, "+KEY_OPTA +" TEXT, "
+				+KEY_OPTB +" TEXT, "+KEY_OPTC +" TEXT, "+KEY_OPTD +" TEXT, "+KEY_HINT+" TEXT)";
+		
 		db.execSQL(sql);		
 		addQuestions();
 		//db.close();
 	}
 	private void addQuestions()
 	{
-		Question q1=new Question("q1 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program");
+		Question q1=new Question("q1 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint1");
 		this.addQuestion(q1);
-		Question q2=new Question("q2 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program");
+		Question q2=new Question("q2 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint2");
 		this.addQuestion(q2);
-		Question q3=new Question("q3 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program");
+		Question q3=new Question("q3 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint3");
 		this.addQuestion(q3);
-		Question q4=new Question("q4 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program");
+		Question q4=new Question("q4 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint4");
 		this.addQuestion(q4);
-		Question q5=new Question("q5 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program");
+		Question q5=new Question("q5 : What is IDE?","defined entity", "developmented engine", "framework", "development environment", "program", "hint5");
 		this.addQuestion(q5);
 	}
 	@Override
@@ -66,6 +73,7 @@ public class DbHelper extends SQLiteOpenHelper {
 		values.put(KEY_OPTB, quest.getOPTB());
 		values.put(KEY_OPTC, quest.getOPTC());
 		values.put(KEY_OPTD, quest.getOPTD());
+		values.put(KEY_HINT, quest.getHINT());
 		// Inserting Row
 		dbase.insert(TABLE_QUEST, null, values);		
 	}
@@ -86,6 +94,7 @@ public class DbHelper extends SQLiteOpenHelper {
 				quest.setOPTB(cursor.getString(4));
 				quest.setOPTC(cursor.getString(5));
 				quest.setOPTD(cursor.getString(6));
+				quest.setHINT(cursor.getString(7));
 				quesList.add(quest);
 			} while (cursor.moveToNext());
 		}

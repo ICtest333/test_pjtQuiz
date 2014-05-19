@@ -41,19 +41,19 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		try{
 			in = getResources().openRawResource(R.raw.quiz);
 
-			//DOM �ļ� ����
+			//DOM generation
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
-			//DOM Ʈ�� ����
+			//DOM Tree
 			Document doc = builder.parse(in);
 
 			StringBuffer sb = new StringBuffer();
-			sb.append("�����\n");
+			sb.append("Quiz Start\n");
 
 			NodeList quizes = doc.getElementsByTagName("quiz");
 			for(int i=0; i<quizes.getLength(); i++){
 				Quiz quiz = new Quiz();
-				NodeList article = quiz.item(i).getChildNodes();
+				NodeList article = quizes.item(i).getChildNodes(); // quizes 
 
 				for(int j=0;j<article.getLength();j++){
 					Node n = article.item(j); 
@@ -83,7 +83,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			mResult.setText(sb.toString());
 
 		}catch(Exception e){
-			Toast.makeText(this, "����:"+e.toString(), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, " Exception :"+e.toString(), Toast.LENGTH_LONG).show();
 		}finally{
 			if(in!=null)try{in.close();}catch(IOException e){}
 		}		

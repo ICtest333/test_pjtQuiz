@@ -17,6 +17,7 @@ public class QuizActivity extends Activity {
 	Question currentQ;
 	TextView txtQuestion;
 	RadioButton rda, rdb, rdc, rdd;
+	Button butHint; //
 	Button butNext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class QuizActivity extends Activity {
 		rdc=(RadioButton)findViewById(R.id.radio2);
 		rdd=(RadioButton)findViewById(R.id.radio3); // added...
 		butNext=(Button)findViewById(R.id.button1);
+		butHint=(Button)findViewById(R.id.button2); //
 		setQuestionView();
 		butNext.setOnClickListener(new View.OnClickListener() {		
 			@Override

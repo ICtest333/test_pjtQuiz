@@ -17,9 +17,10 @@ public class Question {
 		OPTC="";
 		OPTD="";
 		ANSWER="";
+		HINT="";
 	}
 	public Question(String qUESTION, String oPTA, String oPTB, String oPTC, String oPTD,
-			String aNSWER) {
+			String aNSWER, String hINT) {
 		
 		QUESTION = qUESTION;
 		OPTA = oPTA;
@@ -27,6 +28,7 @@ public class Question {
 		OPTC = oPTC;
 		OPTD = oPTD;
 		ANSWER = aNSWER;
+		HINT = hINT;
 	}
 	public int getID()
 	{
@@ -50,6 +52,10 @@ public class Question {
 	public String getANSWER() {
 		return ANSWER;
 	}
+	public String getHINT() {
+		return HINT;
+	}
+	
 	public void setID(int id)
 	{
 		ID=id;
@@ -72,5 +78,7 @@ public class Question {
 	public void setANSWER(String aNSWER) {
 		ANSWER = aNSWER;
 	}
-	
+	public void setHINT(String hINT) {
+		HINT = hINT;
+	}
 }
