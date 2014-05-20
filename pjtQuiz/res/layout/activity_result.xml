@@ -31,6 +31,19 @@
             android:layout_weight="0.08"
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="결과저장" />
+
+        <Button
+            android:id="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="처음으로" />
+
     </LinearLayout>
 
 </RelativeLayout>
