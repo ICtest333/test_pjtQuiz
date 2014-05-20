@@ -27,7 +27,7 @@ public class DatabaseAdapter {
 	static final String QUIZ_Ans2 = "ans2";
 	static final String QUIZ_Ans3 = "ans3";
 	static final String QUIZ_Ans4 = "ans4";	
-	static final String QUIZ_Hint = "hint";
+	static final String QUIZ_Q = "question";
 	//컬럼 인덱스
 	static final int ID_INDEX = 0;
 	static final int CONTENT_INDEX = 1;

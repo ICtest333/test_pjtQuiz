@@ -18,16 +18,7 @@ public class DatabaseAdapter {
 	static final String TABLE_NAME = "quiz";
 	//각 열(컬럼)의 이름
 	static final String QUIZ_ID = "_id";
-	static final String QUIZ_Quiz = "quiz";
-	static final String QUIZ_Opt1 = "opt1";
-	static final String QUIZ_Opt2 = "opt2";
-	static final String QUIZ_Opt3 = "opt3";
-	static final String QUIZ_Opt4 = "opt4";
-	static final String QUIZ_Ans1 = "ans1";
-	static final String QUIZ_Ans2 = "ans2";
-	static final String QUIZ_Ans3 = "ans3";
-	static final String QUIZ_Ans4 = "ans4";	
-	static final String QUIZ_Hint = "hint";
+	static final String QUIZ_CONTENT = "content";
 	//컬럼 인덱스
 	static final int ID_INDEX = 0;
 	static final int CONTENT_INDEX = 1;

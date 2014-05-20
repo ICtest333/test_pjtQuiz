@@ -21,8 +21,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity{
 
-	//EditText mResult;
-	//Button btn;
+	EditText mResult;
+	Button btn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
