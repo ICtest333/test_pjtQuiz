@@ -30,21 +30,11 @@ public class DatabaseAdapter {
 	static final String QUIZ_Hint = "hint";
 	//컬럼 인덱스
 	static final int ID_INDEX = 0;
-	static final int QUIZ_INDEX = 1;
-	static final int OPT1_INDEX = 2;
-	static final int OPT2_INDEX = 3;
-	static final int OPT3_INDEX = 4;
-	static final int OPT4_INDEX = 5;
-	static final int ANS1_INDEX = 6;
-	static final int ANS2_INDEX = 7;
-	static final int ANS3_INDEX = 8;
-	static final int ANS4_INDEX = 9;
-	static final int HINT_INDEX = 10;
-	
+	static final int CONTENT_INDEX = 1;
 	//컬럼 명세
 	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
 	//테이블 생성 SQL
-	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
+	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text," + QUIZ_Opt2 + " text," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
 	//테이블 삭제 SQL
 	static final String DROP_TABLE = "DROP TABLE IF EXISTS " +TABLE_NAME; // EXISTS : -S 빠지면 에러남!
 	
@@ -75,7 +65,7 @@ public class DatabaseAdapter {
 			db.close(); // try/catch 의무아님
 		}
 	}
-
+/*	
 	// 목록(List) 작업 ( _id 내림차순 )
 	public Cursor fetchAllMemo(){ // Cursor : like ResultSet
 		return db.query(//
@@ -85,17 +75,17 @@ public class DatabaseAdapter {
 						null,//selectionArgs : where절에 전달될 데이터
 						null,//groupBy 절
 						null,//having 절
-						QUIZ_ID + " DESC" //orderBy 
-						      //  " DESC" : D앞에 공백!!! 
+						MEMO_ID + " DESC" //orderBy 
+						      //  " DESC" : D앞에 공백!!! (공백없으면달라붙어_idDESC 컬럼없다고 에러발생)
 						    //limit
 						);  //cancellationSignal)		
 	} // fetchAllMemo()
 	
 	
 	//데이터를 추가하고 추가된 데이터의 primary key를 반환함
-	public String addQuiz(String content){
+	public String addMemo(String content){
 		ContentValues values = new ContentValues();
-		values.put(QUIZ_Quiz, content);
+		values.put(MEMO_CONTENT, content);
 		//primary key (autoincrement : 자동으로 부여받음)
 		long id = db.insert(TABLE_NAME, null, values);
 										//null: 빈컬럼은 생기지 않게함
@@ -104,18 +94,17 @@ public class DatabaseAdapter {
 		}
 		return Long.toString(id);
 	}
-
-	/*	
+	
 	//업데이트
-	public void setQuiz(String id, String content){
+	public void setMemo(String id, String content){
 		//없데이트값설정
 		ContentValues values = new ContentValues();
-		values.put(QUIZ_Quiz, content);
+		values.put(MEMO_CONTENT, content);
 		
 		//레코드 업데이트
 		db.update(TABLE_NAME, // 테이블명
 				values, // 수정할 데이터
-				QUIZ_ID + "=?", // where절
+				MEMO_ID + "=?", // where절
 				         // 컬럼이 여러개일 경우 물음표? 여러개 사용가능
 				new String[]{id} // where절 ?에 전달될 primary key
 				);
@@ -125,14 +114,14 @@ public class DatabaseAdapter {
 	//지정된 ID의 행 삭제
 	public void deleteMemo(String id){
 		db.delete(TABLE_NAME, // 테이블명
-				  QUIZ_ID + "=?", //whereClause, 물음표 필요 !!!
+				  MEMO_ID + "=?", //whereClause, 물음표 필요 !!!
 				  new String[]{id} ); //whereArgs : where절 물음표(?)에 전달할 데이터(배열형태로넘김)
 	}
 */	
 /* 검색 ********
 	public String searchMemo(String str){
 		//읽을 데이터의 조건
-		String where = QUIZ_Quiz + " like ?";
+		String where = MEMO_CONTENT + " like ?";
 		//where절의 ?를 대체할 매개 변수
 		String param = str.substring(0, 1) + "%";
 		// 특정문자포함된거검색시 : %문자%
@@ -144,7 +133,7 @@ public class DatabaseAdapter {
 							new String[]{param},
 							null,
 							null,
-							QUIZ_ID+" DESC", // order by, " DESC" : D앞에 공백필요!!
+							MEMO_ID+" DESC", // order by, " DESC" : D앞에 공백필요!!
 							"10"); //limit : 많아도 최대 10개만 가져와라.
 		StringBuffer buff = new StringBuffer();
 		if(c.moveToFirst()){

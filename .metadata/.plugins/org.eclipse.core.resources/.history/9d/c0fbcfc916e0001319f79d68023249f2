@@ -30,17 +30,7 @@ public class DatabaseAdapter {
 	static final String QUIZ_Hint = "hint";
 	//컬럼 인덱스
 	static final int ID_INDEX = 0;
-	static final int QUIZ_INDEX = 1;
-	static final int OPT1_INDEX = 2;
-	static final int OPT2_INDEX = 3;
-	static final int OPT3_INDEX = 4;
-	static final int OPT4_INDEX = 5;
-	static final int ANS1_INDEX = 6;
-	static final int ANS2_INDEX = 7;
-	static final int ANS3_INDEX = 8;
-	static final int ANS4_INDEX = 9;
-	static final int HINT_INDEX = 10;
-	
+	static final int CONTENT_INDEX = 1;
 	//컬럼 명세
 	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
 	//테이블 생성 SQL
@@ -86,7 +76,7 @@ public class DatabaseAdapter {
 						null,//groupBy 절
 						null,//having 절
 						QUIZ_ID + " DESC" //orderBy 
-						      //  " DESC" : D앞에 공백!!! 
+						      //  " DESC" : D앞에 공백!!! (공백없으면달라붙어_idDESC 컬럼없다고 에러발생)
 						    //limit
 						);  //cancellationSignal)		
 	} // fetchAllMemo()
@@ -132,7 +122,7 @@ public class DatabaseAdapter {
 /* 검색 ********
 	public String searchMemo(String str){
 		//읽을 데이터의 조건
-		String where = QUIZ_Quiz + " like ?";
+		String where = MEMO_CONTENT + " like ?";
 		//where절의 ?를 대체할 매개 변수
 		String param = str.substring(0, 1) + "%";
 		// 특정문자포함된거검색시 : %문자%
