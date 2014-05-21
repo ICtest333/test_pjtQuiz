@@ -13,7 +13,7 @@ public class DatabaseAdapter {
 	//Log 처리를 위한 TAG 지정
 	static final String TAG = "DatabaseAdapter";
 	//데이터베이스 파일 이름
-	static final String DB_NAME = "icc_quiz.db";
+	static final String DB_NAME = "icb_quiz.db";
 	//테이블 이름
 	static final String TABLE_NAME = "quiz";
 	//각 열(컬럼)의 이름
@@ -89,7 +89,7 @@ public class DatabaseAdapter {
 						null,//selectionArgs : where절에 전달될 데이터
 						null,//groupBy 절
 						null,//having 절
-						QUIZ_NID + " DESC" //orderBy 
+						QUIZ_ID + " DESC" //orderBy 
 						      //  " DESC" : D앞에 공백!!! 
 						    //limit
 						);  //cancellationSignal)		
@@ -160,13 +160,13 @@ public class DatabaseAdapter {
 							new String[]{param},
 							null,
 							null,
-							QUIZ_NID+" DESC", // order by, " DESC" : D앞에 공백필요!!
+							QUIZ_ID+" DESC", // order by, " DESC" : D앞에 공백필요!!
 							"10"); //limit : 많아도 최대 10개만 가져와라.
 		StringBuffer buff = new StringBuffer();
 		if(c.moveToFirst()){
 			do{
-				long id = c.getLong(NID_INDEX);
-				//String quiz = c.getString(CONTENT_INDEX);
+				long id = c.getLong(ID_INDEX);
+				//String memo = c.getString(CONTENT_INDEX);
 				/*buff.append("id(");
 				buff.append(id);
 				buff.append(")");

@@ -1,6 +1,6 @@
 // DatabaseAdapter : DAO 역할
 package kr.pjt.quiz;
-/*
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,19 +13,42 @@ public class DatabaseAdapter {
 	//Log 처리를 위한 TAG 지정
 	static final String TAG = "DatabaseAdapter";
 	//데이터베이스 파일 이름
-	static final String DB_NAME = "daily_memo.db";
+	static final String DB_NAME = "icb_quiz.db";
 	//테이블 이름
-	static final String TABLE_NAME = "memo";
+	static final String TABLE_NAME = "quiz";
 	//각 열(컬럼)의 이름
-	static final String MEMO_ID = "_id";
-	static final String MEMO_CONTENT = "content";
+	static final String QUIZ_ID = "_id";
+	static final String QUIZ_NID = "nid";
+	static final String QUIZ_CAT = "category";
+	static final String QUIZ_Quiz = "quiz";
+	static final String QUIZ_Opt1 = "opt1";
+	static final String QUIZ_Opt2 = "opt2";
+	static final String QUIZ_Opt3 = "opt3";
+	static final String QUIZ_Opt4 = "opt4";
+	static final String QUIZ_Ans1 = "ans1";
+	static final String QUIZ_Ans2 = "ans2";
+	static final String QUIZ_Ans3 = "ans3";
+	static final String QUIZ_Ans4 = "ans4";	
+	static final String QUIZ_Hint = "hint";
 	//컬럼 인덱스
 	static final int ID_INDEX = 0;
-	static final int CONTENT_INDEX = 1;
+	static final int NID_INDEX = 1;
+	static final int CAT_INDEX = 2;
+	static final int QUIZ_INDEX = 3;
+	static final int OPT1_INDEX = 4;
+	static final int OPT2_INDEX = 5;
+	static final int OPT3_INDEX = 6;
+	static final int OPT4_INDEX = 7;
+	static final int ANS1_INDEX = 8;
+	static final int ANS2_INDEX = 9;
+	static final int ANS3_INDEX = 10;
+	static final int ANS4_INDEX = 11;
+	static final int HINT_INDEX = 12;
+	
 	//컬럼 명세
-	static final String[] PROJECTION = new String[]{MEMO_ID,MEMO_CONTENT};
+	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_NID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
 	//테이블 생성 SQL
-	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + MEMO_ID + " integer primary key autoincrement, " + MEMO_CONTENT + " text not null)";
+	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
 	//테이블 삭제 SQL
 	static final String DROP_TABLE = "DROP TABLE IF EXISTS " +TABLE_NAME; // EXISTS : -S 빠지면 에러남!
 	
@@ -56,9 +79,9 @@ public class DatabaseAdapter {
 			db.close(); // try/catch 의무아님
 		}
 	}
-	
+
 	// 목록(List) 작업 ( _id 내림차순 )
-	public Cursor fetchAllMemo(){ // Cursor : like ResultSet
+	public Cursor fetchAllQUIZ(){ // Cursor : like ResultSet
 		return db.query(//
 				        TABLE_NAME,//table : 테이블명
 						PROJECTION,//columns : 컬럼명세
@@ -66,36 +89,48 @@ public class DatabaseAdapter {
 						null,//selectionArgs : where절에 전달될 데이터
 						null,//groupBy 절
 						null,//having 절
-						MEMO_ID + " DESC" //orderBy 
-						      //  " DESC" : D앞에 공백!!! (공백없으면달라붙어_idDESC 컬럼없다고 에러발생)
+						QUIZ_NID + " DESC" //orderBy 
+						      //  " DESC" : D앞에 공백!!! 
 						    //limit
 						);  //cancellationSignal)		
-	} // fetchAllMemo()
+	} // fetchAllQUIZ()
 	
 	
 	//데이터를 추가하고 추가된 데이터의 primary key를 반환함
-	public String addMemo(String content){
+	public String addQuiz(Quiz quiz){
 		ContentValues values = new ContentValues();
-		values.put(MEMO_CONTENT, content);
+		values.put(QUIZ_NID, quiz.nid);
+		values.put(QUIZ_CAT, quiz.category);
+		values.put(QUIZ_Quiz, quiz.question);
+		values.put(QUIZ_Opt1, quiz.example01);
+		values.put(QUIZ_Opt2, quiz.example02);
+		values.put(QUIZ_Opt3, quiz.example03);
+		values.put(QUIZ_Opt4, quiz.example04);
+		values.put(QUIZ_Ans1, quiz.answer01);
+		values.put(QUIZ_Ans2, quiz.answer02);
+		values.put(QUIZ_Ans3, quiz.answer03);
+		values.put(QUIZ_Ans4, quiz.answer04);
+		values.put(QUIZ_Hint, quiz.hint);
 		//primary key (autoincrement : 자동으로 부여받음)
 		long id = db.insert(TABLE_NAME, null, values);
-										//null: 빈컬럼은 생기지 않게함
+										//null: 빈컬럼은 생기지 않게함 ==> Ans 2, 3, 4, 는 nullable 로 처리해야하는 경우엔??? 사용하지않는인자로 무방함
 		if(id < 0){
 			return "";
 		}
 		return Long.toString(id);
 	}
-	
+
+	/*	
 	//업데이트
-	public void setMemo(String id, String content){
+	public void setQuiz(String id, String content){
 		//없데이트값설정
 		ContentValues values = new ContentValues();
-		values.put(MEMO_CONTENT, content);
+		values.put(QUIZ_Quiz, content);
 		
 		//레코드 업데이트
 		db.update(TABLE_NAME, // 테이블명
 				values, // 수정할 데이터
-				MEMO_ID + "=?", // where절
+				QUIZ_ID + "=?", // where절
 				         // 컬럼이 여러개일 경우 물음표? 여러개 사용가능
 				new String[]{id} // where절 ?에 전달될 primary key
 				);
@@ -103,16 +138,17 @@ public class DatabaseAdapter {
 	}
 		
 	//지정된 ID의 행 삭제
-	public void deleteMemo(String id){
+	public void deleteQuiz(String id){
 		db.delete(TABLE_NAME, // 테이블명
-				  MEMO_ID + "=?", //whereClause, 물음표 필요 !!!
+				  QUIZ_ID + "=?", //whereClause, 물음표 필요 !!!
 				  new String[]{id} ); //whereArgs : where절 물음표(?)에 전달할 데이터(배열형태로넘김)
 	}
+*/	
 	
-	// 검색 ********
-	public String searchMemo(String str){
+// 검색 ********
+	public String searchQuiz(String str){ // int nid ??
 		//읽을 데이터의 조건
-		String where = MEMO_CONTENT + " like ?";
+		String where = QUIZ_Quiz + " like ?"; // equal ??
 		//where절의 ?를 대체할 매개 변수
 		String param = str.substring(0, 1) + "%";
 		// 특정문자포함된거검색시 : %문자%
@@ -124,18 +160,18 @@ public class DatabaseAdapter {
 							new String[]{param},
 							null,
 							null,
-							MEMO_ID+" DESC", // order by, " DESC" : D앞에 공백필요!!
+							QUIZ_NID+" DESC", // order by, " DESC" : D앞에 공백필요!!
 							"10"); //limit : 많아도 최대 10개만 가져와라.
 		StringBuffer buff = new StringBuffer();
 		if(c.moveToFirst()){
 			do{
-				long id = c.getLong(ID_INDEX);
-				String memo = c.getString(CONTENT_INDEX);
-				buff.append("id(");
+				long id = c.getLong(NID_INDEX);
+				//String quiz = c.getString(CONTENT_INDEX);
+				/*buff.append("id(");
 				buff.append(id);
 				buff.append(")");
-				buff.append(memo);
-				buff.append("\n");
+				buff.append(quiz);
+				buff.append("\n");*/
 				
 			}while(c.moveToNext());
 		}
@@ -144,7 +180,6 @@ public class DatabaseAdapter {
 		
 		return buff.toString();
 	}
-	
 	
 	
 	//SQLiteOpenHelper를 상속받아 DB생성 및 테이블 생성
@@ -176,4 +211,3 @@ public class DatabaseAdapter {
 	} // DatabaseHelper
 	
 }
-*/
