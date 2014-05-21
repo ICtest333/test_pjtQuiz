@@ -41,7 +41,6 @@
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="kr.android.video.R.id"/>
 <fullyQualifiedTypeName name="android.os.Environment"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Node"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Element"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>

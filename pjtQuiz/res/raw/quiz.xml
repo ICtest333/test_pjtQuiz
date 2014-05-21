@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quizes>
     <quiz>
+        <nid>1</nid>
         <category>JAVA</category>
         <question>다음중 구분자로 콜론(:)을 반드시 한번 이상 사용해야 하는 경우가 아닌 것은?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>
@@ -8,6 +9,7 @@
         <hint>콜론과 세미콜론의 구분</hint>
     </quiz>
     <quiz>
+        <nid>2</nid>
         <category>JAVA</category>
         <question>자바 2?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>
@@ -15,6 +17,7 @@
         <hint>콜론과 세미콜론의 구분</hint>
     </quiz>
     <quiz>
+        <nid>3</nid>
         <category>Android</category>
         <question>Android1?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>
@@ -22,6 +25,7 @@
         <hint>콜론과 세미콜론의 구분</hint>
     </quiz>
     <quiz>
+        <nid>4</nid>
         <category>Android</category>
         <question>Android2?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>
@@ -29,6 +33,7 @@
         <hint>콜론과 세미콜론의 구분</hint>
     </quiz>
     <quiz>
+        <nid>5</nid>
         <category>Oracle</category>
         <question>Oracle1?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>
@@ -36,6 +41,7 @@
         <hint>콜론과 세미콜론의 구분</hint>
     </quiz>
     <quiz>
+        <nid>6</nid>
         <category>Oracle</category>
         <question>Oracle2?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>

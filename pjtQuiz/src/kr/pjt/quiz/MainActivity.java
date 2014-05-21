@@ -6,31 +6,42 @@ import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+//import kr.adnroid.sqlite.DatabaseAdapter;
+//import kr.adnroid.sqlite.R;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 public class MainActivity extends Activity{
 
+	DatabaseAdapter dbAdapter;
 	//EditText mResult;
 	//Button btn;
+	Cursor c;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 		
-		readQuizFromXML();
+		dbAdapter = new DatabaseAdapter(this);
+		//SQLiteDatabase 객체 생성
+		dbAdapter.open();		
 		
+		readQuizFromXML();
+		  
 	}
 
 	public void readQuizFromXML(){
@@ -41,11 +52,9 @@ public class MainActivity extends Activity{
 
 			//DOM generation
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-
+  
 			//DOM Tree
 			Document doc = builder.parse(in);
-
-			StringBuffer sb = new StringBuffer();
 
 			NodeList quizes = doc.getElementsByTagName("quiz");
 			for(int i=0; i<quizes.getLength(); i++){
@@ -54,6 +63,11 @@ public class MainActivity extends Activity{
 
 				for(int j=0;j<Q.getLength();j++){
 					Node n = Q.item(j); 
+					
+					if(n.getNodeName().equals("nid")){
+						quiz.nid = Integer.parseInt(n.getFirstChild().getNodeValue());
+					}
+					
 					if(n.getNodeName().equals("category")){
 						quiz.category = n.getFirstChild().getNodeValue();
 					}
@@ -76,9 +90,7 @@ public class MainActivity extends Activity{
 						quiz.hint = n.getFirstChild().getNodeValue();
 					}
 				}
-				
-				//Log.i("test",quiz.toString()); // 로그확인용코드(xml로부터읽어들이는지)
-				Toast.makeText(this, quiz.toString(), Toast.LENGTH_SHORT).show(); //토스트확인용코드(xml로부터읽어들이는지)
+				dbAdapter.addQuiz(quiz);
 			}
 			
 		}catch(Exception e){
@@ -86,29 +98,12 @@ public class MainActivity extends Activity{
 		}finally{
 			if(in!=null)try{in.close();}catch(IOException e){}
 		}	
-	}	
-
-	class Quiz{
-		String category;
-		String question;
-		String example01;
-		String example02;
-		String example03;
-		String example04;
-		String answer01;
-		String answer02;
-		String answer03;
-		String answer04;
-		String hint;
-		@Override
-		public String toString() {
-			return "Quiz [category=" + category + ", question=" + question
-					+ ", example01=" + example01 + ", example02=" + example02
-					+ ", example03=" + example03 + ", example04=" + example04
-					+ ", answer01=" + answer01 + ", answer02=" + answer02
-					+ ", answer03=" + answer03 + ", answer04=" + answer04
-					+ ", hint=" + hint + "]";
-		}
-		
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		dbAdapter.close();
+	}	
+	
 }

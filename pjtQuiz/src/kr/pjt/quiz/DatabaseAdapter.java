@@ -13,11 +13,13 @@ public class DatabaseAdapter {
 	//Log 처리를 위한 TAG 지정
 	static final String TAG = "DatabaseAdapter";
 	//데이터베이스 파일 이름
-	static final String DB_NAME = "ict_quiz.db";
+	static final String DB_NAME = "icb_quiz.db";
 	//테이블 이름
 	static final String TABLE_NAME = "quiz";
 	//각 열(컬럼)의 이름
 	static final String QUIZ_ID = "_id";
+	static final String QUIZ_NID = "nid";
+	static final String QUIZ_CAT = "category";
 	static final String QUIZ_Quiz = "quiz";
 	static final String QUIZ_Opt1 = "opt1";
 	static final String QUIZ_Opt2 = "opt2";
@@ -30,21 +32,23 @@ public class DatabaseAdapter {
 	static final String QUIZ_Hint = "hint";
 	//컬럼 인덱스
 	static final int ID_INDEX = 0;
-	static final int QUIZ_INDEX = 1;
-	static final int OPT1_INDEX = 2;
-	static final int OPT2_INDEX = 3;
-	static final int OPT3_INDEX = 4;
-	static final int OPT4_INDEX = 5;
-	static final int ANS1_INDEX = 6;
-	static final int ANS2_INDEX = 7;
-	static final int ANS3_INDEX = 8;
-	static final int ANS4_INDEX = 9;
-	static final int HINT_INDEX = 10;
+	static final int NID_INDEX = 1;
+	static final int CAT_INDEX = 2;
+	static final int QUIZ_INDEX = 3;
+	static final int OPT1_INDEX = 4;
+	static final int OPT2_INDEX = 5;
+	static final int OPT3_INDEX = 6;
+	static final int OPT4_INDEX = 7;
+	static final int ANS1_INDEX = 8;
+	static final int ANS2_INDEX = 9;
+	static final int ANS3_INDEX = 10;
+	static final int ANS4_INDEX = 11;
+	static final int HINT_INDEX = 12;
 	
 	//컬럼 명세
-	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
+	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_NID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
 	//테이블 생성 SQL
-	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
+	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
 	//테이블 삭제 SQL
 	static final String DROP_TABLE = "DROP TABLE IF EXISTS " +TABLE_NAME; // EXISTS : -S 빠지면 에러남!
 	
@@ -77,7 +81,7 @@ public class DatabaseAdapter {
 	}
 
 	// 목록(List) 작업 ( _id 내림차순 )
-	public Cursor fetchAllMemo(){ // Cursor : like ResultSet
+	public Cursor fetchAllQUIZ(){ // Cursor : like ResultSet
 		return db.query(//
 				        TABLE_NAME,//table : 테이블명
 						PROJECTION,//columns : 컬럼명세
@@ -89,16 +93,27 @@ public class DatabaseAdapter {
 						      //  " DESC" : D앞에 공백!!! 
 						    //limit
 						);  //cancellationSignal)		
-	} // fetchAllMemo()
+	} // fetchAllQUIZ()
 	
 	
 	//데이터를 추가하고 추가된 데이터의 primary key를 반환함
-	public String addQuiz(String content){
+	public String addQuiz(Quiz quiz){
 		ContentValues values = new ContentValues();
-		values.put(QUIZ_Quiz, content);
+		values.put(QUIZ_NID, quiz.nid);
+		values.put(QUIZ_CAT, quiz.category);
+		values.put(QUIZ_Quiz, quiz.question);
+		values.put(QUIZ_Opt1, quiz.example01);
+		values.put(QUIZ_Opt2, quiz.example02);
+		values.put(QUIZ_Opt3, quiz.example03);
+		values.put(QUIZ_Opt4, quiz.example04);
+		values.put(QUIZ_Ans1, quiz.answer01);
+		values.put(QUIZ_Ans2, quiz.answer02);
+		values.put(QUIZ_Ans3, quiz.answer03);
+		values.put(QUIZ_Ans4, quiz.answer04);
+		values.put(QUIZ_Hint, quiz.hint);
 		//primary key (autoincrement : 자동으로 부여받음)
 		long id = db.insert(TABLE_NAME, null, values);
-										//null: 빈컬럼은 생기지 않게함
+										//null: 빈컬럼은 생기지 않게함 ==> Ans 2, 3, 4, 는 nullable 로 처리해야하는 경우엔???
 		if(id < 0){
 			return "";
 		}
@@ -123,14 +138,14 @@ public class DatabaseAdapter {
 	}
 		
 	//지정된 ID의 행 삭제
-	public void deleteMemo(String id){
+	public void deleteQuiz(String id){
 		db.delete(TABLE_NAME, // 테이블명
 				  QUIZ_ID + "=?", //whereClause, 물음표 필요 !!!
 				  new String[]{id} ); //whereArgs : where절 물음표(?)에 전달할 데이터(배열형태로넘김)
 	}
 */	
 /* 검색 ********
-	public String searchMemo(String str){
+	public String searchQuiz(String str){
 		//읽을 데이터의 조건
 		String where = QUIZ_Quiz + " like ?";
 		//where절의 ?를 대체할 매개 변수

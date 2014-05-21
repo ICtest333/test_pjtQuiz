@@ -1,0 +1,25 @@
+package kr.pjt.quiz;
+
+public class Quiz{
+	String category;
+	String question;
+	String example01;
+	String example02;
+	String example03;
+	String example04;
+	String answer01;
+	String answer02;
+	String answer03;
+	String answer04;
+	String hint;
+	@Override
+	public String toString() {
+		return "Quiz [category=" + category + ", question=" + question
+				+ ", example01=" + example01 + ", example02=" + example02
+				+ ", example03=" + example03 + ", example04=" + example04
+				+ ", answer01=" + answer01 + ", answer02=" + answer02
+				+ ", answer03=" + answer03 + ", answer04=" + answer04
+				+ ", hint=" + hint + "]";
+	}
+	
+}

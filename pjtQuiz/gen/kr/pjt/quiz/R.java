@@ -1040,19 +1040,10 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f060053;
+        public static final int action_settings=0x7f06004a;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
-        public static final int button1=0x7f060049;
-        public static final int button2=0x7f06004a;
-        public static final int button3=0x7f06004b;
-        public static final int button4=0x7f060051;
-        public static final int button5=0x7f06004c;
-        public static final int button6=0x7f06004d;
-        public static final int button7=0x7f060050;
-        public static final int button8=0x7f06004e;
-        public static final int button9=0x7f06004f;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
         public static final int container=0x7f06003c;
@@ -1073,7 +1064,7 @@ containing a value of this type.
         public static final int image=0x7f060027;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
-        public static final int menu_settings=0x7f060052;
+        public static final int menu_settings=0x7f060049;
         public static final int middle=0x7f060012;
         public static final int never=0x7f060009;
         public static final int next=0x7f060045;
@@ -1085,6 +1076,7 @@ containing a value of this type.
         public static final int opt4=0x7f060042;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
+        public static final int quiz_text=0x7f06003d;
         public static final int radio=0x7f06002f;
         public static final int radioGroup1=0x7f06003e;
         public static final int ratingBar1=0x7f060046;
@@ -1107,7 +1099,6 @@ containing a value of this type.
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
         public static final int textResult=0x7f060047;
-        public static final int textView1=0x7f06003d;
         public static final int title=0x7f06002b;
         public static final int top_action_bar=0x7f060020;
         public static final int up=0x7f060021;
