@@ -113,7 +113,7 @@ public class DatabaseAdapter {
 		values.put(QUIZ_Hint, quiz.hint);
 		//primary key (autoincrement : 자동으로 부여받음)
 		long id = db.insert(TABLE_NAME, null, values);
-										//null: 빈컬럼은 생기지 않게함 ==> Ans 2, 3, 4, 는 nullable 로 처리해야하는 경우엔???
+										//null: 빈컬럼은 생기지 않게함 ==> Ans 2, 3, 4, 는 nullable 로 처리해야하는 경우엔??? 사용하지않는인자로 무방함
 		if(id < 0){
 			return "";
 		}
@@ -144,10 +144,11 @@ public class DatabaseAdapter {
 				  new String[]{id} ); //whereArgs : where절 물음표(?)에 전달할 데이터(배열형태로넘김)
 	}
 */	
-/* 검색 ********
-	public String searchQuiz(String str){
+	
+// 검색 ********
+	public String searchQuiz(String str){ // int nid ??
 		//읽을 데이터의 조건
-		String where = QUIZ_Quiz + " like ?";
+		String where = QUIZ_Quiz + " like ?"; // equal ??
 		//where절의 ?를 대체할 매개 변수
 		String param = str.substring(0, 1) + "%";
 		// 특정문자포함된거검색시 : %문자%
@@ -180,7 +181,6 @@ public class DatabaseAdapter {
 		return buff.toString();
 	}
 	
-*/	
 	
 	//SQLiteOpenHelper를 상속받아 DB생성 및 테이블 생성
 	//테이블 수정, 삭제 클래스

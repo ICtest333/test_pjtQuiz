@@ -5326,3 +5326,6 @@ Binding(ALT+SHIFT+ARROW_LEFT,
 
 !ENTRY com.android.ide.eclipse.adt 1 0 2014-05-21 17:20:15.099
 !MESSAGE No valid Android XML Editor Delegate found for file /pjtQuiz/res/raw/quiz.xml [Res F/pjtQuiz/res/raw, type RAW]
+
+!ENTRY com.android.ide.eclipse.adt 1 0 2014-05-21 18:56:27.799
+!MESSAGE No valid Android XML Editor Delegate found for file /44DOMDemo/res/raw/words.xml [Res F/44DOMDemo/res/raw, type RAW]

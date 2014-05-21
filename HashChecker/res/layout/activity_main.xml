@@ -1,0 +1,185 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cdd.kr.android.hashchecker.MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/llo_fileSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp" >
+
+        <EditText
+            android:id="@+id/etFilePath1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </EditText>
+
+        <Button
+            android:id="@+id/btnFileSearch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/btn_fileSearch" 
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llo_MD5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/llo_fileSearch"
+        android:layout_marginLeft="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_MD5" />
+
+        <TextView
+            android:id="@+id/tvMD5Result1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llo_SHA1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/llo_MD5"
+        android:layout_marginLeft="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_SHA1" />
+
+        <TextView
+            android:id="@+id/tvSHA1Result1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/llo_SHA1"
+        android:layout_marginLeft="10dp" >
+
+        <Switch
+            android:id="@+id/swCompare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/swt_fileCompare" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/llComare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="18dp"
+        android:orientation="vertical"
+         >
+
+        <LinearLayout
+            android:id="@+id/llo_fileSearch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp" >
+
+            <EditText
+                android:id="@+id/etFilePath2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnFileSearch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/btn_fileSearch" />
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_MD5" />
+
+        <TextView
+            android:id="@+id/tvMD5Result2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_SHA1" />
+
+        <TextView
+            android:id="@+id/tvSHA1Result2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:text="해시값 표시" />
+    </LinearLayout>
+      
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCompResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="60dp" >
+
+        <ImageView
+            android:id="@+id/ivResult"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:src="@drawable/compare_icon" />
+
+        <TextView
+            android:id="@+id/tvCompResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            
+            android:text="현재 비교한 결과 값이 업습니다." />
+
+        <ImageView
+            android:id="@+id/ivShare"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:src="@drawable/share_icon" />
+    </LinearLayout>
+
+</RelativeLayout>
