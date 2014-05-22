@@ -48,8 +48,7 @@ public class DatabaseAdapter {
 	//컬럼 명세
 	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_NID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
 	//테이블 생성 SQL
-	//static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
-	static final String CREATE_TABLE = "CREATE table  IF NOT EXISTS "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
+	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
 	//테이블 삭제 SQL
 	static final String DROP_TABLE = "DROP TABLE IF EXISTS " +TABLE_NAME; // EXISTS : -S 빠지면 에러남!
 	
@@ -149,7 +148,7 @@ public class DatabaseAdapter {
 // 검색 ********
 	public String searchQuiz(String str){ // int nid ??
 		//읽을 데이터의 조건
-		String where = QUIZ_Quiz + " like ?"; // = (equal:동등비교) ??
+		String where = QUIZ_Quiz + " like ?"; // equal ??
 		//where절의 ?를 대체할 매개 변수
 		String param = str.substring(0, 1) + "%";
 		// 특정문자포함된거검색시 : %문자%
