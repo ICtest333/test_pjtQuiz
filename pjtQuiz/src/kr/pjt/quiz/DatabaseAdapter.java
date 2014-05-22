@@ -13,7 +13,7 @@ public class DatabaseAdapter {
 	//Log 처리를 위한 TAG 지정
 	static final String TAG = "DatabaseAdapter";
 	//데이터베이스 파일 이름
-	static final String DB_NAME = "icc_quiz.db";
+	static final String DB_NAME = "icD_quiz.db";
 	//테이블 이름
 	static final String TABLE_NAME = "quiz";
 	//각 열(컬럼)의 이름
@@ -48,8 +48,9 @@ public class DatabaseAdapter {
 	//컬럼 명세
 	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_NID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
 	//테이블 생성 SQL
-	//static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
-	static final String CREATE_TABLE = "CREATE table  IF NOT EXISTS "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
+	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
+	//static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
+	                                  //"CREATE TABLE IF NOT EXISTS "=>이런문법은없음!!!
 	//테이블 삭제 SQL
 	static final String DROP_TABLE = "DROP TABLE IF EXISTS " +TABLE_NAME; // EXISTS : -S 빠지면 에러남!
 	
@@ -90,8 +91,7 @@ public class DatabaseAdapter {
 						null,//selectionArgs : where절에 전달될 데이터
 						null,//groupBy 절
 						null,//having 절
-						QUIZ_NID + " DESC" //orderBy 
-						      //  " DESC" : D앞에 공백!!! 
+						QUIZ_ID + " DESC" //orderBy  //  " DESC" : D앞에 공백!!! 
 						    //limit
 						);  //cancellationSignal)		
 	} // fetchAllQUIZ()
@@ -123,19 +123,28 @@ public class DatabaseAdapter {
 
 	/*	
 	//업데이트
-	public void setQuiz(String id, String content){
+	public void setQuiz(Quiz quiz){
 		//없데이트값설정
 		ContentValues values = new ContentValues();
-		values.put(QUIZ_Quiz, content);
+		values.put(QUIZ_NID, quiz.nid);
+		values.put(QUIZ_CAT, quiz.category);
+		values.put(QUIZ_Quiz, quiz.question);
+		values.put(QUIZ_Opt1, quiz.example01);
+		values.put(QUIZ_Opt2, quiz.example02);
+		values.put(QUIZ_Opt3, quiz.example03);
+		values.put(QUIZ_Opt4, quiz.example04);
+		values.put(QUIZ_Ans1, quiz.answer01);
+		values.put(QUIZ_Ans2, quiz.answer02);
+		values.put(QUIZ_Ans3, quiz.answer03);
+		values.put(QUIZ_Ans4, quiz.answer04);
+		values.put(QUIZ_Hint, quiz.hint);
 		
 		//레코드 업데이트
 		db.update(TABLE_NAME, // 테이블명
 				values, // 수정할 데이터
-				QUIZ_ID + "=?", // where절
-				         // 컬럼이 여러개일 경우 물음표? 여러개 사용가능
+				QUIZ_ID + "=?", // where절 // 컬럼이 여러개일 경우 물음표? 여러개 사용가능
 				new String[]{id} // where절 ?에 전달될 primary key
-				);
-		
+				);		
 	}
 		
 	//지정된 ID의 행 삭제
@@ -147,40 +156,31 @@ public class DatabaseAdapter {
 */	
 	
 // 검색 ********
-	public String searchQuiz(String str){ // int nid ??
+	//퀴즈 중복 생성 안되도록 체크 메서드
+	public boolean searchQuiz(String str){ // int nid ??
+		boolean flag = false;
 		//읽을 데이터의 조건
-		String where = QUIZ_Quiz + " like ?"; // = (equal:동등비교) ??
-		//where절의 ?를 대체할 매개 변수
-		String param = str.substring(0, 1) + "%";
-		// 특정문자포함된거검색시 : %문자%
-		
+		String where = QUIZ_NID + " = ?"; // cf. = (equal:동등비교) ??
+
 		//검색
 		Cursor c = db.query(TABLE_NAME,
 							PROJECTION,
 							where,
-							new String[]{param},
+							new String[]{str},
 							null,
 							null,
-							QUIZ_NID+" DESC", // order by, " DESC" : D앞에 공백필요!!
-							"10"); //limit : 많아도 최대 10개만 가져와라.
-		StringBuffer buff = new StringBuffer();
+							null); //limit : 많아도 최대 10개만 가져와라.
 		if(c.moveToFirst()){
-			do{
-				long id = c.getLong(NID_INDEX);
-				//String quiz = c.getString(CONTENT_INDEX);
-				/*buff.append("id(");
-				buff.append(id);
-				buff.append(")");
-				buff.append(quiz);
-				buff.append("\n");*/
-				
-			}while(c.moveToNext());
+			flag = true;
 		}
 		
 		c.close(); // Cursor 자원정리
 		
-		return buff.toString();
+		return flag;
 	}
+	
+	//카테고리선택시 카테고리별 문제 검색해서 뿌려주는 메서드 필요(인텐트객체활용=>AndroidManifest.xml에등록필!)
+	
 	
 	
 	//SQLiteOpenHelper를 상속받아 DB생성 및 테이블 생성

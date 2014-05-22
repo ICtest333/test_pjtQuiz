@@ -34,7 +34,7 @@
     </quiz>
     <quiz>
         <nid>5</nid>
-        <category>Oracle</category>
+        <category>SQL</category>
         <question>Oracle1?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>
         <answer first="do~while문" second="" third="" fourth=""/>
@@ -42,7 +42,7 @@
     </quiz>
     <quiz>
         <nid>6</nid>
-        <category>Oracle</category>
+        <category>SQL</category>
         <question>Oracle2?</question>
         <example first="삼항연산" second="switch~case문" third="break 레이블" fourth="do~while문"/>
         <answer first="do~while문" second="" third="" fourth=""/>
