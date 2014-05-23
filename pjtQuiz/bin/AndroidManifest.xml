@@ -22,13 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="QuizActivity"></activity>
+        <activity android:name="SearchActivity"></activity>
         <activity android:name="JavaActivity"></activity>
         <activity android:name="SqlActivity"></activity>
         <activity android:name="AndroidActivity"></activity>
         <activity android:name="JspActivity"></activity>
         <activity android:name="JsActivity"></activity>
         <activity android:name="EtcActivity"></activity>
-        <activity android:name="SearchActivity"></activity>
         <activity
             android:name="kr.pjt.quiz.ResultActivity"
             android:label="@string/title_activity_result" >

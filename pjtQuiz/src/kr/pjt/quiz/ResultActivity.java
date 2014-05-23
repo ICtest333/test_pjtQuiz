@@ -1,5 +1,5 @@
 package kr.pjt.quiz;
-
+/*
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -40,3 +40,4 @@ public class ResultActivity extends Activity {
 		return true;
 	}
 }
+*/

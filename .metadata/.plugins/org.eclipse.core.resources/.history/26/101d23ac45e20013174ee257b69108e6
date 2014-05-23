@@ -1,0 +1,180 @@
+package kr.pjt.quiz;
+
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class JavaActivity extends Activity {
+
+	TextView text;
+	
+	//-------- 상수 정의 시작----------------//
+	//Log 처리를 위한 TAG 지정
+	static final String TAG = "DatabaseAdapter";
+	//데이터베이스 파일 이름
+	static final String DB_NAME = "icD_quiz.db";
+	//테이블 이름
+	static final String TABLE_NAME = "quiz";
+	//각 열(컬럼)의 이름
+	static final String QUIZ_ID = "_id";
+	static final String QUIZ_NID = "nid";
+	static final String QUIZ_CAT = "category";
+	static final String QUIZ_Quiz = "quiz";
+	static final String QUIZ_Opt1 = "opt1";
+	static final String QUIZ_Opt2 = "opt2";
+	static final String QUIZ_Opt3 = "opt3";
+	static final String QUIZ_Opt4 = "opt4";
+	static final String QUIZ_Ans1 = "ans1";
+	static final String QUIZ_Ans2 = "ans2";
+	static final String QUIZ_Ans3 = "ans3";
+	static final String QUIZ_Ans4 = "ans4";	
+	static final String QUIZ_Hint = "hint";
+	//컬럼 인덱스
+	static final int ID_INDEX = 0;
+	static final int NID_INDEX = 1;
+	static final int CAT_INDEX = 2;
+	static final int QUIZ_INDEX = 3;
+	static final int OPT1_INDEX = 4;
+	static final int OPT2_INDEX = 5;
+	static final int OPT3_INDEX = 6;
+	static final int OPT4_INDEX = 7;
+	static final int ANS1_INDEX = 8;
+	static final int ANS2_INDEX = 9;
+	static final int ANS3_INDEX = 10;
+	static final int ANS4_INDEX = 11;
+	static final int HINT_INDEX = 12;
+	
+	//컬럼 명세
+	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_NID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
+	//테이블 생성 SQL
+	//static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
+	
+	//테이블 삭제 SQL
+	//static final String DROP_TABLE = "DROP TABLE IF EXISTS " +TABLE_NAME; // EXISTS : -S 빠지면 에러남!
+	
+	//-------- 상수 정의 끝----------------//
+	
+	//데이터베이스 연동 객체(일종의 커넥션객체)
+	private SQLiteDatabase db;
+	
+	//데이터베이스를 이용한 어플리케이션의 컨텍스트 타입 보관
+	private Context context;
+		
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_quiz); 
+		
+		text = (TextView)findViewById(R.id.textView1);
+		
+		Intent i = getIntent();
+		Bundle b = i.getExtras();
+
+		if(b==null){
+			//데이터 보관하는 Bundle객체가 null이면 전달할 데이터가 존재하지않음을 의미함
+			text.append("\n\n저장된 데이터가 없습니다.");
+		}else{
+			String msg = b.getString("msg");
+			text.append("\n\n"+msg);
+		}		
+	}//onCreate
+	
+	public JavaActivity(Context context){
+			this.context = context;		
+		}
+/*		
+		//SQLiteDatabase 생성 (커넥션같은 역할)
+		public void open() throws SQLException{
+			try{
+				db = (new JavaActivity(context)).getWritableDatabase();
+			}catch(SQLException e){
+				db = (new JavaActivity(context)).getReadableDatabase(); // 쓸수없으면읽을수있게라도..
+			}
+		} // open()
+*/		
+/*		//SQLiteDatabase 자원정리
+		public void close(){
+			if(db!=null){
+				db.close(); // try/catch 의무아님
+			}
+		}
+*/
+		// 목록(List) 작업 ( _id 내림차순 )
+		public Cursor fetchAllQUIZ(){ // Cursor : like ResultSet
+			return db.query(//
+					        TABLE_NAME,//table : 테이블명
+							PROJECTION,//columns : 컬럼명세
+							null,//selection : where절
+							null,//selectionArgs : where절에 전달될 데이터
+							null,//groupBy 절
+							null,//having 절
+							QUIZ_ID + " DESC" //orderBy  //  " DESC" : D앞에 공백!!! 
+							    //limit
+							);  //cancellationSignal)		
+		} // fetchAllQUIZ()
+		
+		
+		//데이터를 추가하고 추가된 데이터의 primary key를 반환함
+		public String addQuiz(Quiz quiz){
+			ContentValues values = new ContentValues();
+			values.put(QUIZ_NID, quiz.nid);
+			values.put(QUIZ_CAT, quiz.category);
+			values.put(QUIZ_Quiz, quiz.question);
+			values.put(QUIZ_Opt1, quiz.example01);
+			values.put(QUIZ_Opt2, quiz.example02);
+			values.put(QUIZ_Opt3, quiz.example03);
+			values.put(QUIZ_Opt4, quiz.example04);
+			values.put(QUIZ_Ans1, quiz.answer01);
+			values.put(QUIZ_Ans2, quiz.answer02);
+			values.put(QUIZ_Ans3, quiz.answer03);
+			values.put(QUIZ_Ans4, quiz.answer04);
+			values.put(QUIZ_Hint, quiz.hint);
+			//primary key (autoincrement : 자동으로 부여받음)
+			//long id = db.select(TABLE_NAME, null, values);  ?????????
+											//null: 빈컬럼은 생기지 않게함 ==> Ans 2, 3, 4, 는 nullable 로 처리해야하는 경우엔??? 사용하지않는인자로 무방함
+			if(CAT_INDEX < 0){
+				return "";
+			}
+			return Long.toString(CAT_INDEX);
+		}
+
+		
+	// 검색 ********
+		//퀴즈 중복 생성 안되도록 체크 메서드
+		public boolean searchQuiz(int CAT_INDEX){ // int nid ??
+			boolean flag = false;
+			//읽을 데이터의 조건
+			String where = CAT_INDEX + " = ?"; // cf. = (equal:동등비교) ??
+
+			//검색
+			Cursor c = db.query(TABLE_NAME,
+								PROJECTION,
+								where,
+								new String[CAT_INDEX],
+								null,
+								null,
+								null); //limit : 많아도 최대 10개만 가져와라.
+			if(c.moveToFirst()){
+				flag = true;
+			}
+			
+			c.close(); // Cursor 자원정리
+			
+			return flag;
+		}
+		
+		//카테고리선택시 카테고리별 문제 검색해서 뿌려주는 메서드 필요(인텐트객체활용=>AndroidManifest.xml에등록필!)
+		
+		
+	
+	
+	
+}
+
+
+

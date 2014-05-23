@@ -180,7 +180,21 @@ public class DatabaseAdapter {
 	}
 	
 	//카테고리선택시 카테고리별 문제 검색해서 뿌려주는 메서드 필요(인텐트객체활용=>AndroidManifest.xml에등록필!)
-	
+	public Cursor getQuizbyCategory(String str){
+		//읽을 데이터의 조건
+		String where = QUIZ_CAT+ " = ?"; // cf. = (equal:동등비교) ??
+
+		//검색
+		Cursor c = db.query(TABLE_NAME,
+							PROJECTION,
+							where,
+							new String[]{str},
+							null,
+							null,  
+							null); 
+		
+		return c;
+	}
 	
 	
 	//SQLiteOpenHelper를 상속받아 DB생성 및 테이블 생성

@@ -25,7 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	DatabaseAdapter dbAdapter;
 	Cursor c;
 	Button btn_java,btn_sql,btn_android,btn_jsp,btn_js,btn_etc,btn_search;
-	EditText edit_quiz, edit_search;
+	EditText edit_search;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,28 +129,24 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			// È­¸é ÀÌµ¿, µ¥ÀÌÅÍ Àü´Þ
 			Intent i = null; // Intent : ¾×Æ¼ºñÆ¼°£ ¸Å°³¿ªÇÒ, 
 			if(v.getId()==R.id.btn_java){//
-				i = new Intent(this,JavaActivity.class);
-				i.putExtra("msg", edit_quiz.getText().toString());//Å°,¹ë·ù ½Ö
+				i = new Intent(this,QuizActivity.class);
+				i.putExtra("category", btn_java.getText().toString());//Å°,¹ë·ù ½Ö
 			}else if(v.getId()==R.id.btn_sql){//
-				i = new Intent(this,SqlActivity.class);
-				i.putExtra("msg", edit_quiz.getText().toString());//Å°,¹ë·ù ½Ö
+				i = new Intent(this,QuizActivity.class);
+				i.putExtra("category", btn_sql.getText().toString());//Å°,¹ë·ù ½Ö
 			}else if(v.getId()==R.id.btn_android){//
-				i = new Intent(this,AndroidActivity.class);
-				i.putExtra("msg", edit_quiz.getText().toString());//Å°,¹ë·ù ½Ö
+				i = new Intent(this,QuizActivity.class);
+				i.putExtra("category", btn_android.getText().toString());//Å°,¹ë·ù ½Ö
 			}else if(v.getId()==R.id.btn_jsp){//
-				i = new Intent(this,JspActivity.class);
-				i.putExtra("msg", edit_quiz.getText().toString());//Å°,¹ë·ù ½Ö
+				i = new Intent(this,QuizActivity.class);
+				i.putExtra("category", btn_jsp.getText().toString());//Å°,¹ë·ù ½Ö
 			}else if(v.getId()==R.id.btn_js){//
-				i = new Intent(this,JsActivity.class);
-				i.putExtra("msg", edit_quiz.getText().toString());//Å°,¹ë·ù ½Ö
+				i = new Intent(this,QuizActivity.class);
+				i.putExtra("category", btn_js.getText().toString());//Å°,¹ë·ù ½Ö
 			}else if(v.getId()==R.id.btn_etc){//
-				i = new Intent(this,EtcActivity.class);
-				i.putExtra("msg", edit_quiz.getText().toString());//Å°,¹ë·ù ½Ö
-			}else if(v.getId()==R.id.btn_search){//
-				i = new Intent(this,SearchActivity.class);
-				i.putExtra("msg", edit_quiz.getText().toString());// btn_search??  °Ë»ö Å°¿öµå¸¦ ¹ÙÅÁÀ¸·Î ÇÑ °Ë»ö ¿¬°á ????
+				i = new Intent(this,QuizActivity.class);
+				i.putExtra("category", btn_etc.getText().toString());//Å°,¹ë·ù ½Ö
 			}
-			
 			
 			//È­¸éÀÌµ¿
 			startActivity(i);//ÀÎÅÙÆ®°¡°¡Áö°í ÀÖ´Â ¾×Æ¼ºñÆ¼Á¤º¸·Î µÎ¹øÂ°È­¸éÈ£Ãâ(È­¸éÀÌµ¿)
