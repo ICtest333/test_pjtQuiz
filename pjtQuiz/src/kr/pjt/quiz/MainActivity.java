@@ -23,7 +23,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements View.OnClickListener{
 
 	DatabaseAdapter dbAdapter;
-	Cursor c;
 	Button btn_java,btn_sql,btn_android,btn_jsp,btn_js,btn_etc,btn_search;
 	EditText edit_search;
 

@@ -1,6 +1,7 @@
 package kr.pjt.quiz;
 
 public class Quiz{
+	long _id;
 	int nid;
 	String category;
 	String question;

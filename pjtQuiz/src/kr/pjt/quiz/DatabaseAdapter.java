@@ -1,6 +1,8 @@
 // DatabaseAdapter : DAO 역할
 package kr.pjt.quiz;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -46,7 +48,7 @@ public class DatabaseAdapter {
 	static final int HINT_INDEX = 12;
 	
 	//컬럼 명세
-	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_NID,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
+	static final String[] PROJECTION = new String[]{QUIZ_ID,QUIZ_NID,QUIZ_CAT,QUIZ_Quiz,QUIZ_Opt1,QUIZ_Opt2,QUIZ_Opt3,QUIZ_Opt4,QUIZ_Ans1,QUIZ_Ans2,QUIZ_Ans3,QUIZ_Ans4,QUIZ_Hint};
 	//테이블 생성 SQL
 	static final String CREATE_TABLE = "CREATE table "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
 	//static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "+ TABLE_NAME + "(" + QUIZ_ID + " integer primary key autoincrement, " + QUIZ_NID + " integer not null, " + QUIZ_CAT + " text," + QUIZ_Quiz + " text not null," + QUIZ_Opt1 + " text not null," + QUIZ_Opt2 + " text not null," + QUIZ_Opt3 + " text," + QUIZ_Opt4 + " text," + QUIZ_Ans1 + " text not null," + QUIZ_Ans2 + " text," + QUIZ_Ans3 + " text," + QUIZ_Ans4 + " text," + QUIZ_Hint + " text)";
@@ -180,7 +182,8 @@ public class DatabaseAdapter {
 	}
 	
 	//카테고리선택시 카테고리별 문제 검색해서 뿌려주는 메서드 필요(인텐트객체활용=>AndroidManifest.xml에등록필!)
-	public Cursor getQuizbyCategory(String str){
+	public ArrayList<Quiz> getQuizbyCategory(String str){
+		ArrayList<Quiz> list = null;
 		//읽을 데이터의 조건
 		String where = QUIZ_CAT+ " = ?"; // cf. = (equal:동등비교) ??
 
@@ -193,7 +196,34 @@ public class DatabaseAdapter {
 							null,  
 							null); 
 		
-		return c;
+		if(c.moveToFirst()){
+			list = new ArrayList<Quiz>();
+			do{				
+				Quiz quiz = new Quiz();
+				quiz._id = c.getLong(ID_INDEX);
+				quiz.nid = c.getInt(NID_INDEX );
+				quiz.category = c.getString(CAT_INDEX);
+				quiz.question = c.getString(QUIZ_INDEX);
+				quiz.example01 = c.getString(OPT1_INDEX);
+				quiz.example02 = c.getString(OPT2_INDEX);
+				quiz.example03 = c.getString(OPT3_INDEX);
+				quiz.example04 = c.getString(OPT4_INDEX);
+				quiz.answer01 = c.getString(ANS1_INDEX);
+				quiz.answer02 = c.getString(ANS2_INDEX);
+				quiz.answer03 = c.getString(ANS3_INDEX);
+				quiz.answer04 = c.getString(ANS4_INDEX);
+				quiz.hint = c.getString(HINT_INDEX);
+				
+				
+				
+				list.add(quiz);
+				
+			}while(c.moveToNext());
+		}
+		
+		c.close();
+		
+		return list;
 	}
 	
 	

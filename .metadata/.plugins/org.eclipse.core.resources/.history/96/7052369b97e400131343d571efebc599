@@ -1,0 +1,58 @@
+package kr.pjt.quiz;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewSwitcher.ViewFactory;
+
+public class QuizActivity extends Activity {
+
+	String category;
+	private DatabaseAdapter dbAdapter;
+	 String [] str = {"A","B","C","D","E","F","G","H","I"};
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_quiz);
+		
+		dbAdapter = new DatabaseAdapter(this);
+		//SQLiteDatabase 객체 생성
+		dbAdapter.open();	
+		
+		Intent i = getIntent();
+		Bundle bundle = i.getExtras();
+		if(bundle!=null){
+			category = bundle.getString("category");
+		}
+		
+		Cursor c = dbAdapter.getQuizbyCategory(category);
+		
+	}
+	 // 동적으로 하위뷰 추가
+    private ViewFactory factory = new ViewFactory() {
+		
+    	@Override
+		public View makeView() {
+			TextView view = new TextView(QuizActivity.this);
+			view.setGravity(Gravity.CENTER);
+			view.setWidth(200);
+			view.setHeight(200);
+			view.setTextSize(TypedValue.COMPLEX_RADIX_23p0, 80);
+			return view;
+		}
+	};
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		dbAdapter.close();
+	}
+}
+
+
+

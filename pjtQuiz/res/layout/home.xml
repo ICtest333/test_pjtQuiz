@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Java" />
+        android:text="JAVA" />
 
     <Button
         android:id="@+id/btn_sql"
